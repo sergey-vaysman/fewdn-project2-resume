@@ -69,20 +69,25 @@ var work = {
 	]
 };
 
-if (work.jobs != null && work.jobs.length > 0) {
-	for (job in work.jobs) {
-		$("#workExperience").append(HTMLworkStart);
-		var employer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
-		var title = HTMLworkTitle.replace("%data%", work.jobs[job].title);
-		$(".work-entry:last").append(employer + title);
-		var dates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
-		$(".work-entry:last").append(dates);
-		var jobLocation = HTMLworkLocation.replace("%data%", work.jobs[job].location);
-		$(".work-entry:last").append(jobLocation);
-		var description = HTMLworkDescription.replace("%data%", work.jobs[job].description);
-		$(".work-entry:last").append(description);
+var displayWork = function() {
+	if (work.jobs != null && work.jobs.length > 0) {
+		for (job in work.jobs) {
+			$("#workExperience").append(HTMLworkStart);
+			var employer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
+			var title = HTMLworkTitle.replace("%data%", work.jobs[job].title);
+			$(".work-entry:last").append(employer + title);
+			var dates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
+			$(".work-entry:last").append(dates);
+			var jobLocation = HTMLworkLocation.replace("%data%", work.jobs[job].location);
+			$(".work-entry:last").append(jobLocation);
+			var description = HTMLworkDescription.replace("%data%", work.jobs[job].description);
+			$(".work-entry:last").append(description);
+		}
 	}
 }
+
+displayWork();
+
 
 var schools = [
 	{
@@ -112,3 +117,53 @@ var education = {
 	"schools": schools,
 	"onlineCourses": onlineCourses
 };
+
+var inName = function() {
+	return inName(bio.name);
+}
+
+var inName = function(name) {
+	console.log("name: " + name);
+	if (name != null) {
+		var names = name.split(" ");
+		if (names.length > 1) {
+			var firstName = names[0];
+			var lastName = names[1];
+			firstName = firstName.charAt(0).toUpperCase() + firstName.slice(1);
+			lastName = lastName.toUpperCase();
+			return firstName + " " + lastName;
+		}
+	}
+	return null;
+}
+$("#main").append(internationalizeButton);
+
+
+var projects = {
+	"projects": [
+		{
+			"title": "Sample Project 1",
+			"dates": "2014",
+			"description": "Who moved my cheese cheesy feet cauliflower cheese. Queso taleggio when the cheese comes out everybody's happy airedale ricotta cheese and wine paneer camembert de normandie. Swiss mozzarella cheese slices feta fromage frais airedale swiss cheesecake. Hard cheese blue castello halloumi parmesan say cheese stinking bishop jarlsberg.",
+			"images": ["images/197x148.gif", "images/197x148.gif"]
+		}
+	]
+};
+projects.display = function() {
+	for (project in projects.projects) {
+		var projectItem = projects.projects[project];
+		$("#projects").append(HTMLprojectStart);
+		var title = HTMLprojectTitle.replace("%data%", projectItem.title);
+		$(".project-entry:last").append(title);
+		var dates = HTMLprojectDates.replace("%data%", projectItem.dates);
+		$(".project-entry:last").append(dates);
+		var description = HTMLprojectDescription.replace("%data%", projectItem.description);
+		$(".project-entry:last").append(description);
+		for (image in projectItem.images) {
+			var image = HTMLprojectImage.replace("%data%", projectItem.images[image]);
+			$(".project-entry:last").append(image);
+		}
+	}
+}
+
+projects.display();
