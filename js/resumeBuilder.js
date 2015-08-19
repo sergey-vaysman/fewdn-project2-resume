@@ -15,23 +15,38 @@ var bio = {
 	"skills": skills,
 	"biopic": "images/fry.jpg"
 };
+
+/*
+ * Returns an array with contact data, which can be added to header or footer
+ */
+var getContactsArray = function(contacts) {
+	var formattedMobile = HTMLmobile.replace("%data%", contacts.mobile);
+	var formattedEmail = HTMLemail.replace("%data%", contacts.email);
+	var formattedGithub = HTMLgithub.replace("%data%", contacts.github);
+	var formattedTwitter = HTMLtwitter.replace("%data%", contacts.twitter);
+	var formattedLocation = HTMLlocation.replace("%data%", contacts.location);
+	var contactsArr = [
+		formattedMobile, formattedEmail, formattedGithub, formattedTwitter, formattedLocation
+	];
+	return contactsArr;
+}
+
+bio.displayContacts = function() {
+	var contactsArr = getContactsArray(bio.contacts);
+	for (contactItem in contactsArr) {
+		$("#topContacts").append(contactsArr[contactItem]);
+		$("#footerContacts").append(contactsArr[contactItem]);
+	}
+}
+
 bio.display = function() {
 	var formattedName = HTMLheaderName.replace("%data%", bio.name);
 	var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
 	$("#header").prepend(formattedRole);
 	$("#header").prepend(formattedName);
 
-	var formattedMobile = HTMLmobile.replace("%data%", bio.contacts.mobile);
-	var formattedEmail = HTMLemail.replace("%data%", bio.contacts.email);
-	var formattedGithub = HTMLgithub.replace("%data%", bio.contacts.github);
-	var formattedTwitter = HTMLtwitter.replace("%data%", bio.contacts.twitter);
-	var formattedLocation = HTMLlocation.replace("%data%", bio.contacts.location);
-	var contactsArr = [
-		formattedMobile, formattedEmail, formattedGithub, formattedTwitter, formattedLocation
-	];
-	for (contactItem in contactsArr) {
-		$("#topContacts").append(contactsArr[contactItem]);
-	}
+	var contactsArr = getContactsArray(bio.contacts);
+	bio.displayContacts();
 
 	var formattedPic = HTMLbioPic.replace("%data%", bio.biopic);
 	$("#header").append(formattedPic);
@@ -49,7 +64,12 @@ bio.display = function() {
 	}
 }
 
-
+bio.displayContactsFooter = function() {
+	var contactsArr = getContactsArray(bio.contacts);
+	for (contactItem in contactsArr) {
+		$("#footerContacts").append(contactsArr[contactItem]);
+	}
+}
 
 var work = {
 	"jobs": [
@@ -171,8 +191,6 @@ var inName = function(name) {
 	}
 	return null;
 }
-$("#main").append(internationalizeButton);
-
 
 var projects = {
 	"projects": [
@@ -201,12 +219,23 @@ projects.display = function() {
 	}
 }
 
+var displayMap = function() {
+	$("#mapDiv").append(googleMap);
+}
+
+var detectClick = function() {
+	$(document).click(function(loc) {
+		console.log("x: " + loc.pageX + ", y: " + loc.pageY);
+	});	
+}
+
 var displayContent = function() {
 	bio.display();
 	education.display();
 	projects.display();
 	work.display();
+	displayMap();
+	detectClick();
 };
 
 displayContent();
-
