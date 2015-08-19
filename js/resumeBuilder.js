@@ -23,18 +23,17 @@ var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
 $("#header").prepend(formattedRole);
 $("#header").prepend(formattedName);
 
-//TODO: create an array with these objects
 var formattedMobile = HTMLmobile.replace("%data%", bio.contacts.mobile);
 var formattedEmail = HTMLemail.replace("%data%", bio.contacts.email);
 var formattedGithub = HTMLgithub.replace("%data%", bio.contacts.github);
 var formattedTwitter = HTMLtwitter.replace("%data%", bio.contacts.twitter);
 var formattedLocation = HTMLlocation.replace("%data%", bio.contacts.location);
-//TODO: append using a for-loop through the array
-$("#topContacts").append(formattedMobile);
-$("#topContacts").append(formattedEmail);
-$("#topContacts").append(formattedGithub);
-$("#topContacts").append(formattedTwitter);
-$("#topContacts").append(formattedLocation);
+var contactsArr = [
+	formattedMobile, formattedEmail, formattedGithub, formattedTwitter, formattedLocation
+];
+for (contactItem in contactsArr) {
+	$("#topContacts").append(contactsArr[contactItem]);
+}
 
 var formattedPic = HTMLbioPic.replace("%data%", bio.biopic);
 $("#header").append(formattedPic);
@@ -42,15 +41,14 @@ $("#header").append(formattedPic);
 var formattedWelcomeMessage = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
 $("#header").append(formattedWelcomeMessage);
 
-$("#header").append(HTMLskillsStart);
-var formattedSkill1 = HTMLskills.replace("%data%", bio.skills[0]);
-var formattedSkill2 = HTMLskills.replace("%data%", bio.skills[1]);
-var formattedSkill3 = HTMLskills.replace("%data%", bio.skills[2]);
-var formattedSkill4 = HTMLskills.replace("%data%", bio.skills[3]);
-$("#skills").append(formattedSkill1);
-$("#skills").append(formattedSkill2);
-$("#skills").append(formattedSkill3);
-$("#skills").append(formattedSkill4);
+
+if (bio.skills != null && bio.skills.length > 0) {
+	$("#header").append(HTMLskillsStart);
+	for (skill in bio.skills) {
+		var formattedSkill = HTMLskills.replace("%data%", bio.skills[skill]);
+		$("#skills").append(formattedSkill);
+	}
+}
 
 var work = {
 	"jobs": [
@@ -60,9 +58,31 @@ var work = {
 			"location": "Brooklyn, NY",
 			"dates": "January 3000 - Future",
 			"description": "Who moved my cheese cheesy feet cauliflower cheese. Queso taleggio when the cheese comes out everybody's happy airedale ricotta cheese and wine paneer camembert de normandie. Swiss mozzarella cheese slices feta fromage frais airedale swiss cheesecake. Hard cheese blue castello halloumi parmesan say cheese stinking bishop jarlsberg."
+		},
+		{
+			"employer": "Panucci's Pizza",
+			"title": "Delivery Boy",
+			"location": "Manhattan, NY",
+			"dates": "1998 - December 31, 1999",
+			"description": "Who moved my cheese cheesy feet cauliflower cheese. Queso taleggio when the cheese comes out everybody's happy airedale ricotta cheese and wine paneer camembert de normandie. Swiss mozzarella cheese slices feta fromage frais airedale swiss cheesecake. Hard cheese blue castello halloumi parmesan say cheese stinking bishop jarlsberg."
 		}
 	]
 };
+
+if (work.jobs != null && work.jobs.length > 0) {
+	for (job in work.jobs) {
+		$("#workExperience").append(HTMLworkStart);
+		var employer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
+		var title = HTMLworkTitle.replace("%data%", work.jobs[job].title);
+		$(".work-entry:last").append(employer + title);
+		var dates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
+		$(".work-entry:last").append(dates);
+		var jobLocation = HTMLworkLocation.replace("%data%", work.jobs[job].location);
+		$(".work-entry:last").append(jobLocation);
+		var description = HTMLworkDescription.replace("%data%", work.jobs[job].description);
+		$(".work-entry:last").append(description);
+	}
+}
 
 var schools = [
 	{
