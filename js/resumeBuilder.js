@@ -52,7 +52,7 @@ bio.display = function() {
 	$("#header").append(formattedWelcomeMessage);
 
 
-	if (bio.skills != null && bio.skills.length > 0) {
+	if (bio.skills !== null && bio.skills.length > 0) {
 		$("#header").append(HTMLskillsStart);
 		for (var skill in bio.skills) {
 			var formattedSkill = HTMLskills.replace("%data%", bio.skills[skill]);
@@ -80,7 +80,7 @@ var work = {
 	]
 };
 work.display = function() {
-	if (work.jobs != null && work.jobs.length > 0) {
+	if (work.jobs !== null && work.jobs.length > 0) {
 		for (var job in work.jobs) {
 			$("#workExperience").append(HTMLworkStart);
 			var employer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
@@ -126,7 +126,7 @@ var education = {
 	"onlineCourses": onlineCourses
 };
 education.display = function() {
-	if (education.schools != null) {
+	if (education.schools !== null) {
 		for (var school in schools) {
 			var schoolItem = schools[school];
 			$("#education").append(HTMLschoolStart);
@@ -137,7 +137,7 @@ education.display = function() {
 			$(".education-entry:last").append(dates);
 			var location = HTMLschoolLocation.replace("%data%", schoolItem.location);
 			$(".education-entry:last").append(location);
-			if (schoolItem.majors != null) {
+			if (schoolItem.majors !== null) {
 				for (var major in schoolItem.majors) {
 					var majorItem = schoolItem.majors[major];
 					var majorDisplay = HTMLschoolMajor.replace("%data%", majorItem);
@@ -146,7 +146,7 @@ education.display = function() {
 			}
 		}
 	}
-	if (education.onlineCourses != null) {
+	if (education.onlineCourses !== null) {
 		$("#education").append(HTMLonlineClasses);
 		for (var onlineCourse in onlineCourses) {
 			$("#education").append(HTMLschoolStart);
@@ -168,7 +168,7 @@ var inName = function() {
 };
 var inName = function(name) {
 	console.log("name: " + name);
-	if (name != null) {
+	if (name !== null) {
 		var names = name.split(" ");
 		if (names.length > 1) {
 			var firstName = names[0];
