@@ -1,0 +1,25 @@
+
+Saving Code like a Professional
+
+You just used HTML and CSS to create a portfolio.
+Now (and for the rest of the nanodegree), you'll need a place to store your code so that you can easily share it with others.
+In this nanodegree we will use git and GitHub to do this.
+
+What you need to do next depends on whether or not you have a GitHub account and are fluent in the version control system git.
+
+
+If you’re comfortable with git
+
+Create a GitHub repository with the code from the project you just completed.
+
+
+If you’re not comfortable with git
+
+Note: This step applies to you even if you've used git before but are not completely comfortable.
+
+We recommend you take Udacity's course on Version Control with Git and GitHub.
+https://www.udacity.com/course/viewer#!/c-ud775-nd/
+This course will teach you skills that will make you a more efficient developer who can work individually or on a large team.
+
+When you’re comfortable with git, create a GitHub repository with the code from the project you just completed and review our Git commit message style guide.
+https://udacity.github.io/frontend-nanodegree-styleguide/git.html

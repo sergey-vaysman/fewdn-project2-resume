@@ -1,0 +1,150 @@
+
+///////////////////////////////////////////////////////////////////////////////
+
+Content
+
+SPECIFICATION
+Biography, education, work, and project JSON objects include all the properties given in the JSON object schemas, property names and data types are as described, and property values contain real or fake data.
+Dynamically displayed resume sections (biography, education, work, projects, footer) include all of the real or fake JSON object data.
+MEETS SPECIFICATION
+
+///////////////////////////////////////////////////////////////////////////////
+
+Function Use
+
+SPECIFICATION
+All resume sections are built using modular functions which can run in any order.
+MEETS SPECIFICATION
+
+///////////////////////////////////////////////////////////////////////////////
+
+Encapsulation
+
+SPECIFICATION
+All code to display each resume section is contained within the object with the data for the same section.
+MEETS SPECIFICATION
+
+Reviewer Comments
+Although you took a different approach, all code to display each resume section is contained within the object with the data for the same section.
+Well done.
+
+///////////////////////////////////////////////////////////////////////////////
+
+Additional Interactivity
+
+SPECIFICATION
+The resume includes a map that pulls location data from the resume.
+MEETS SPECIFICATION
+
+Reviewer Comments
+See suggestions on how to implement Info Windows.
+
+Requirements to exceed the specification 
+The resume contains javascript interactivity in addition to the map (For example: Bootstrap Navbar, Polymer components).
+
+///////////////////////////////////////////////////////////////////////////////
+
+Artistic Creativity
+
+SPECIFICATION
+All CSS is default.
+MEETS SPECIFICATION
+
+Reviewer Comments
+To exceeds specifications you can include custom CSS that alters colors and the page layout.
+
+Requirements to exceed the specification 
+Custom CSS alters both colors and grid layout of resume.
+
+///////////////////////////////////////////////////////////////////////////////
+
+Code review, js/resumeBuilder.js
+
+line 3:
+SUGGESTION
+Content:
+contacts and skills should be properties that exists within the bio object.
+Your approach is not wrong, it just uses a bit more code because you're creating a brand new variable.
+A simpler approach would be something like this:
+
+var bio = {
+    "name": "Philip J. Fry",
+    "role": "Front-End Web Developer",
+    "contacts": {
+        "mobile": "650-555-5555",
+        "email": "fry@planetexpress.com",
+        "github": "fry",
+        "twitter": "@fry",
+        "location": "New York, NY"
+    },
+    "welcomeMessage": "Shut up and take my money..",
+    "skills": ["awesomeness", "delivering things", "cryogenic sleep", "saving the universe"],
+    "biopic": "images/futurama-money.png"
+};
+
+
+line 32:
+SUGGESTION
+Code Quality: Missing semicolon
+Please use a semi-colon.
+The semi-colon acts like a period in a sentence.
+It helps the computer know where there are stopping points in the code.
+
+Details here (http://www.codecademy.com/blog/78-your-guide-to-semicolons-in-javascript) and in the Udacity JavaScript Style Guide (http://udacity.github.io/frontend-nanodegree-styleguide/javascript.html)
+
+Tip: Another way to find these instances is using code linters like JSHint.
+https://review.udacity.com/jshint.com
+Just copy and paste your code, and follow along the recommendations given.
+
+
+line 37:
+Code Quality: Avoiding code repetition
+You can use less code by taking advantage of jQuery's ability to target multiple ID's.
+Like this:
+
+bio.displayContacts = function() {
+    var contactsArr = getContactsArray(bio.contacts);
+    for (contactItem in contactsArr) {
+        $("#topContacts, #footerContacts").append(contactsArr[contactItem]);
+    }
+}
+
+
+line 60:
+Code Quality: Always declare variables with var
+
+When you don't specify var, the variable gets placed in the global context, potentially overwriting existing values.
+Also, if there's no declaration, it's hard to tell in what scope a variable lives.
+Like this:
+
+for (var skill in bio.skills) {...}
+
+Details in the Udacity JavaScript Style Guide
+http://udacity.github.io/frontend-nanodegree-styleguide/javascript.html
+
+Tip: Again, find these instances using code linters like JSHint.
+https://review.udacity.com/jshint.com
+Just copy and paste your code, and follow along the recommendations given.
+
+
+line 232:
+AWESOME
+Nice to see all functions used to display each resume section grouped together.
+
+///////////////////////////////////////////////////////////////////////////////
+
+Code review, js/helper.js
+
+
+line 175:
+Additional Interactivity: Info Windows
+You are missing a line of code to make the Info Windows appear.
+They are little helper windows that appear when you click on one of the locations on the map.
+
+Check out this resource.
+https://developers.google.com/maps/documentation/javascript/infowindows
+
+If all goes well you should see something like this:
+https://udacity-github-sync-content.s3.amazonaws.com/_imgs/262/1440014284/Screen_Shot_2015-08-19_at_4.57.39_PM.png
+
+///////////////////////////////////////////////////////////////////////////////
